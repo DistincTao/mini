@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>API 연습</title>
+</head>
+<body>
+    <h1> KaKao API TEST </h1>
+    <div class="search">
+      <input id="search" type="text" name="serach">
+    </div>
+    <div class="container">
+      <ul>
+        <li class="thumbnail"></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <script>
+      let search = '';
+      $(".search").on("change","#search", function(e) {
+        search = $('input').val()
+        console.log(search);
+
+        $.ajax({
+          method: "GET",
+          url: "https://dapi.kakao.com/v3/search/book?target=title&",
+          data: {
+            query: search,
+          },
+          headers: {
+            Authorization: "KakaoAK 0f7acd5ca96b1d76578d02adc4161263"
+          },
+        })
+        .done(function (data) {
+          console.log(data);
+          parsingData(data.documents);
+        });
+      })
+
+      function parsingData(json) {
+        $.each(json, function (index, item) {
+          let title = json[index].title;
+          let author = json[index].authors[0];
+          let price = json[index].price;
+          let publisher = json[index].publisher;
+          let description = json[index].contents;
+          let thumbnail = json[index].thumbnail;
+          console.log(thumbnail);
+          
+      })
+    }
+
+
+
+
+    </script>
+</body>
+
+</html>

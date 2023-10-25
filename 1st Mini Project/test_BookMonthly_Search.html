@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>API 연습</title>
+</head>
+<body>
+    <h1> 이달의 추천도서 TEST </h1>
+    <script>
+      $(function(){
+        parsingData();
+      });
+
+      $.ajax({
+        url:  "http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbdistinctao1827002&QueryType=Bestseller&MaxResults=10&start=1&SearchTarget=Book&output=js&Version=20131101",
+        method: "GET",
+        datatype : "JSON",
+      })
+      .done(function (data) {
+        console.log(data);
+        parsingData(data);
+        // }
+      });
+      
+      function parsingData(json){
+        // let items = json.getElementsByTagName('item');
+        // let title = $(items).eq(0);
+        console.log(json);
+      }
+
+
+
+    </script>
+</body>
+
+</html>

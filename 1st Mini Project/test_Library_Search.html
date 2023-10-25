@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>API 연습</title>
+</head>
+<body>
+    <h1> 도서관 TEST </h1>
+    </div>
+    <div class="container">
+
+    </div>
+    <script>
+      // $(function(){
+      //   parsingData();
+      // });
+      let search = '';
+      // $(".search").on("click","#btn", function(e) {
+      //   search = $('input').val()
+      //   console.log(search);
+
+        $.ajax({
+          url: "http://openapi.seoul.go.kr:8088/6645514d4664697336355956525956/json/SeoulPublicLibraryInfo/1/300",
+          method: "GET",
+          datatype : "JSON",
+        })
+        .done(function (data) {
+          console.log(data);
+          parsingData(data.SeoulPublicLibraryInfo.row);
+          // }
+        });
+      
+      function parsingData(json){
+        $.each(json, function (index, item){
+          let district = json[index].CODE_VALUE;
+          let libraryName = json[index].LBRRY_NAME;
+          let libraryAddr = json[index].ADRES;
+          let operation = json[index].OP_TIME;
+          let libraryTel = json[index].TEL_NO;
+          let homePage = json[index].HMPG_URL;
+          let holiday = json[index].FDRM_CLOSE_DATE;
+          let lat = json[index].YDNTS;
+          let lon = json[index].XCNTS;
+        // let title = $(items).eq(0).children().eq(0).val();
+        console.log(libraryName);
+
+        });
+      }
+
+
+
+    </script>
+</body>
+
+</html>
